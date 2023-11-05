@@ -1,26 +1,23 @@
+import java.util.*;
 import java.io.IOException;
 import java.net.URI;
 
 class Handler implements URLHandler {
-    // Add on strings as the user inputs the string
     int num = 0;
-    String newString;
+    ArrayList<String> number = new ArrayList<String> ();
+    string output = "";
 
     public String handleRequest(URI url) {
-        if (url.getPath().equals("/")) {
-            return String.format("%d. %s", num, newString);
+        if (url.getPath().equals("/add-messages")) {
+            String [] parameters = url.getQuery().split("=");
+            if (parameters[0].equals("s")){
+                number.add(parameters[1]);
+                num++;
+                output+=String.format(String.valueOf(index) + "." + number.get(num-1) + "\n");
+                return output;
         } 
-        else {
-            if (url.getPath().contains("/add-message")) {
-                String[] parameters = url.getQuery().split("=");
-                if (parameters[0].equals("s")) {
-                    num += 1;
-                    return String.format("%d. %s", num, newString);
-                }
-            }
-            return "404 Not Found!";
+        }
+            return "404 not found!";
+        
         }
     }
-}
-
-/add-message?s=<string>
